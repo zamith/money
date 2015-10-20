@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'money/version'
+require 'money_ruby/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "money"
+  spec.name          = "money_ruby"
   spec.version       = Money::VERSION
   spec.authors       = ["Zamith"]
   spec.email         = ["zamith.28@gmail.com"]

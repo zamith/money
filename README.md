@@ -1,4 +1,4 @@
-# Money
+# Money Ruby
 
 Handles money in Ruby. Everything from arithmetic with different currencies, to
 converting currencies.
@@ -8,7 +8,7 @@ converting currencies.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'money'
+gem 'money_ruby'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install money
+    $ gem install money_ruby
 
 ## Usage
 

@@ -1,4 +1,4 @@
-require "money"
+require "money_ruby/money"
 
 RSpec.describe Money do
   after(:each) do

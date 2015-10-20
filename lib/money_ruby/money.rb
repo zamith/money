@@ -1,6 +1,6 @@
-require "money/version"
+class Money
+  attr_reader :currency
 
-module Money
   def self.conversion_rates(currency, conversion_rates = nil)
     conversion_rates_data[currency] = conversion_rates
   end
@@ -13,7 +13,18 @@ module Money
     @conversion_rates = nil
   end
 
+  def initialize(amount, currency)
+    @amount_in_cents = amount * 100
+    @currency = currency
+  end
+
+  def amount
+    amount_in_cents / 100
+  end
+
   private
+
+  attr_reader :amount_in_cents
 
   def self.conversion_rates_data
     @conversion_rates ||= Hash.new({})
