@@ -16,7 +16,7 @@ RSpec.describe Money do
   end
 
   context ".conversion_rate" do
-    it "returns 0 if it has't a converstion rate yet" do
+    it "returns 0 if it has't a conversion rate yet" do
       expect(Money.conversion_rate(from: "EUR", to: "USD")).to eq 0
     end
   end
