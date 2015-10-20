@@ -24,4 +24,12 @@ RSpec.describe Money do
       expect(money.amount).to eq 50
     end
   end
+
+  context "#inspect" do
+    it "prints the money information nicely" do
+      money = Money.new(50, "EUR")
+
+      expect(money.inspect).to match(/50.00 EUR/)
+    end
+  end
 end

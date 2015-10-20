@@ -1,17 +1,8 @@
+require "money_ruby/configuration"
+
 class Money
   attr_reader :currency
-
-  def self.conversion_rates(currency, conversion_rates = nil)
-    conversion_rates_data[currency] = conversion_rates
-  end
-
-  def self.conversion_rate(from:, to:)
-    conversion_rates_data[from][to] || 0
-  end
-
-  def self.clear_conversion_rates!
-    @conversion_rates = nil
-  end
+  include Configuration
 
   def initialize(amount, currency)
     @amount_in_cents = amount * 100
@@ -22,11 +13,11 @@ class Money
     amount_in_cents / 100
   end
 
+  def inspect
+    "%.2f %s" % [amount, currency]
+  end
+
   private
 
   attr_reader :amount_in_cents
-
-  def self.conversion_rates_data
-    @conversion_rates ||= Hash.new({})
-  end
 end
