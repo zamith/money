@@ -1,3 +1,5 @@
+require "money_ruby/errors"
+
 module Configuration
   def self.included(base)
     base.extend ClassMethods
@@ -9,7 +11,8 @@ module Configuration
     end
 
     def conversion_rate(from:, to:)
-      conversion_rates_data[from][to] || 0
+      conversion_rates_data[from][to] ||
+        raise(NoConversionRateError, "No conversion rate known for '#{from}' -> '#{to}'")
     end
 
     def clear_conversion_rates!

@@ -11,13 +11,17 @@ RSpec.describe Money do
 
       Money.clear_conversion_rates!
 
-      expect(Money.conversion_rate(from: "EUR", to: "USD")).to eq 0
+      expect {
+        Money.conversion_rate(from: "EUR", to: "USD")
+      }.to raise_error NoConversionRateError
     end
   end
 
   context ".conversion_rate" do
-    it "returns 0 if it has't a conversion rate yet" do
-      expect(Money.conversion_rate(from: "EUR", to: "USD")).to eq 0
+    it "raise an error if no conversion rate found" do
+      expect {
+        Money.conversion_rate(from: "EUR", to: "USD")
+      }.to raise_error NoConversionRateError
     end
   end
 
