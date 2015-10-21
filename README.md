@@ -30,6 +30,21 @@ Money.conversion_rates('EUR', {
 })
 ```
 
+### Get the conversion rate from one currency to another
+
+```ruby
+Money.conversion_rate(from: "EUR", to: "USD")
+```
+
+*This might throw `NoConversionRateError`, if no conversion rate is specified
+for those currencies.*
+
+### Clear conversion rates
+
+```ruby
+Money.clear_conversion_rates!
+```
+
 ### Instantiate money objects:
 
 ```ruby

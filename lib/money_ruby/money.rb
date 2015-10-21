@@ -1,19 +1,13 @@
-require "forwardable"
 require "money_ruby/configuration"
-require "money_ruby/converter"
 
 class Money
   attr_reader :currency, :amount_in_cents
   include Configuration
   include Comparable
 
-  extend Forwardable
-  def_delegators :@converter, :convert_to, :convert_when_needed
-
-  def initialize(amount, currency, unit: :basic, converter: Converter)
+  def initialize(amount, currency, unit: :basic)
     @amount_in_cents = (unit == :cent ? amount : amount * 100).to_i
     @currency = currency
-    @converter = converter.new(amount_in_cents, currency)
   end
 
   def amount
@@ -22,6 +16,10 @@ class Money
 
   def inspect
     "%.2f %s" % [amount, currency]
+  end
+
+  def convert_to(new_currency)
+    Money.new(amount_for_other_currency(new_currency), new_currency, unit: :cent)
   end
 
   def <=>(other)
@@ -48,5 +46,20 @@ class Money
 
   def /(dividend)
     Money.new(amount_in_cents / dividend, currency, unit: :cent)
+  end
+
+  private
+
+  def convert_when_needed(other)
+    if currency == other.currency
+      yield amount_in_cents, other.amount_in_cents
+    else
+      converted_other = other.convert_to(currency)
+      yield amount_in_cents, converted_other.amount_in_cents
+    end
+  end
+
+  def amount_for_other_currency(new_currency)
+    amount_in_cents * Money.conversion_rate(from: currency, to: new_currency)
   end
 end
