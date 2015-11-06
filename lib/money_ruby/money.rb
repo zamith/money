@@ -48,6 +48,10 @@ class Money
     Money.new(amount_in_cents / dividend, currency, unit: :cent)
   end
 
+  def coerce(num)
+    [self, num]
+  end
+
   private
 
   def convert_when_needed(other)

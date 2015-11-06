@@ -111,6 +111,10 @@ RSpec.describe Money do
     it "multiplies values" do
       expect(Money.new(20, "USD") * 3).to eq Money.new(60, "USD")
     end
+
+    it "multiplies values reversed" do
+      expect(3 * Money.new(20, "USD")).to eq Money.new(60, "USD")
+    end
   end
 
   context "#/" do
